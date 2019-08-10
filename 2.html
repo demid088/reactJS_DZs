@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>2</title>
+</head>
+
+<body>
+  <script>
+    function calculateArea(a = 0, b = 0, c = 0) {
+      if (a <= 0 || b <= 0) {
+        return 0;
+      }
+
+      let S = 0;
+      let F = '';
+      let I = '';
+
+      if (c <= 0) {
+        F = 'Прямоугольник';
+        I = `${a}x${b}`;
+        S = calcRect(a, b);
+      } else {
+        F = 'Треугольник';
+        I = `${a}x${b}x${c}`;
+        S = calcTriangle(a, b, c);
+      }
+
+      return {
+        area: S,
+        figure: F,
+        input: I,
+      };
+    }
+
+    function calcRect(a, b) {
+      return a * b;
+    }
+
+    function calcTriangle(a, b, c) {
+      // высчитываем полупериметр треугольника
+      let P = (a + b + c) / 2;
+      // высчитываем площадь треуг. по формуле Герона
+      return Math.sqrt(P * (P - a) * (P - b) * (P - c));
+    }
+
+    console.log('Площадь прямоугольника 2х3 = ');
+    console.log(calculateArea(2, 3));
+    console.log('Площадь треугольника 3х4х5 = ');
+    console.log(calculateArea(3, 4, 5));
+  </script>
+</body>
+
+</html>
