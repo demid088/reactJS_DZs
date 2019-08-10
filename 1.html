@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>1</title>
+</head>
+
+<body>
+  <script>
+    // функция loop
+    function loop(times = 0, callback = null) {
+      if (callback != null) {
+        for (let i = 0; i < times; i++) {
+          callback();
+        }
+      }
+    }
+
+    // функция, которую будем передавать
+    function some() {
+      console.log('Функция отработала!');
+    }
+
+    // запуск
+    loop(3, some);
+  </script>
+</body>
+
+</html>
