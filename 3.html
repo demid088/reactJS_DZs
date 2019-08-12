@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>3</title>
+</head>
+
+<body>
+  <script>
+    // класс Human
+    class Human {
+      constructor(name, age, dateOfBirth) {
+        if (typeof name === 'string' &&
+            Number.isInteger(age) &&
+            age > 0 &&
+            typeof dateOfBirth === 'string') {
+          this.name = name;
+          this.age = age;
+          this.dateOfBirth = dateOfBirth;
+        } else {
+          throw 'Один из параметров имеет не верное значение!';
+        }
+      }
+      displayInfo() {
+        return `Имя: ${this.name}, возраст: ${this.age}, ДР: ${this.dateOfBirth}`;
+      }
+    }
+    // класс Employee
+    class Employee extends Human {
+      constructor(name, age, dateOfBirth, salary, department) {
+        if (typeof name === 'string' &&
+            Number.isInteger(age) &&
+            age > 0 &&
+            typeof dateOfBirth === 'string' &&
+            Number.isInteger(salary) &&
+            salary > 0 &&
+            typeof department === 'string') {
+          super(name, age, dateOfBirth);
+          this.salary = salary;
+          this.department = department;
+        } else {
+          throw 'Один из параметров имеет не верное значение!';
+        }
+
+      }
+      displayInfo() {
+        return `${super.displayInfo()}, З/П: ${this.salary}, отдел: ${this.department}`;
+      }
+    }
+    // класс Manager
+    class Manager extends Employee {
+      constructor(name, age, dateOfBirth, salary, department) {
+        super(name, age, dateOfBirth, salary, department);
+        this.developers = [];
+      }
+      // добавление разработчика
+      addDeveloper(developer) {
+        if (typeof developer === 'object') {
+          this.developers.push(developer);
+        } else {
+          throw 'Передаваемый параметр должен быть типа "object"!';
+        }
+      }
+      // удаление разработчика
+      removeDeveloper(developer) {
+        if (typeof developer === 'object') {
+          for (let i = 0; i < this.developers.length; i++) {
+            if (this.developers[i].name === developer.name) {
+              this.developers.splice(i, 1);
+              break;
+            }
+          }
+        } else {
+          throw 'Передаваемый параметр должен быть типа "object"!';
+        }
+      }
+    }
+    // класс Developer
+    class Developer extends Employee {
+      constructor(name, age, dateOfBirth, salary, department) {
+        super(name, age, dateOfBirth, salary, department);
+        this.manager = '';
+      }
+      // добавление менеджера
+      addManager(manager) {
+        if (typeof manager === 'string') {
+          this.manager = manager;
+        } else {
+          throw 'Передаваемый параметр должен быть типа "string"!';
+        }
+      }
+      // удаление менеджера
+      removeManager() {
+        this.manager = '';
+      }
+    }
+  </script>
+</body>
+
+</html>
